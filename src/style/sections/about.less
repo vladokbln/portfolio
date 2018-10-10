@@ -1,0 +1,37 @@
+.about {
+	position: relative;
+	padding: 60px 0;
+	background-color: #f0f1f1;
+	&-flex {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+	&-info {
+		width: 50%;
+	}
+	&-intro {
+		font-size: 22px;
+		margin-bottom: 20px;
+	}
+	&-text {
+		font-size: 18px;
+		span {
+			display: block;
+			margin: 20px 0;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+	&-img { 
+		display: flex;
+		-ms-align-items: center;
+		align-items: center;
+		max-width: 475px;
+		width: 100%;
+		img {
+			width: 100%;
+		}
+	}
+}

@@ -1,0 +1,167 @@
+.navbar {
+	width: 100%;
+	// position: static;
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 10px;
+	background-color: #fff;
+	border: none;
+	transition: 1s;
+	&-wrap {
+		position: relative;
+	}
+	&.fixed {
+		background-color: #000;
+		position: fixed;
+		padding: 0;
+		transition: 0.8s;
+		.logo {
+			color: #fff;
+			&:hover {
+				color: #fff;
+			}
+		}
+		.nav-link {
+			color: #fff;
+			&:hover, &:active {
+				background-color: rgba(265, 265, 265, .6);
+				color: #fff;
+			}
+		}
+		.nav-toggle__line {
+			background-color: #fff;
+		}
+		&.active {
+			.nav {
+				top: 55px;
+				background-color: rgba(0,0,0,.9);
+				&-item {
+					border-color: #fff;
+					&:first-child {
+						border-top: 1px solid #fff;
+					}
+				}
+			}
+			.nav-toggle__line {
+				background-color: #fff;
+			}
+		}
+	}
+	&.active {
+		.nav {
+			display: block;
+			width: 100%;
+			min-height: 175px;
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 75px;
+			background-color: rgba(255, 255, 255, .9);
+			text-align: center;
+			float: none;
+			transition: 0.3s;
+			z-index: 10;
+			&-item {
+				float: none;
+				border-bottom: 1px solid #000;
+				&:first-child {
+					border-top: 1px solid #000
+				}
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+		}
+		.nav-toggle__line {
+			&--top {
+				top: 10px;
+				transition: .3s;
+				transform: rotate(45deg);
+			}
+			&--middle {
+				top: 8.5px;
+				transition: 0.3s;
+				opacity: 0;
+			}
+			&--bottom {
+				top: 10px;
+				transition: 0.3s;
+				transform: rotate(-45deg);
+			}
+		}
+	}
+}
+.logo {
+	float: left;
+	padding: 10px;
+	font-size: 25px;
+	color: #212121;
+	font-weight: 700;
+	span {
+		font-weight: 600;
+		opacity: 0.6;
+	}
+	&:hover, &:focus, &:active {
+		color: #212121;
+	}
+}
+.nav {
+	float: right;
+	&-list {
+		.clearfix;
+	}
+	&-item {
+		float: right;
+	}
+	&-link {
+		display: block;
+		padding: 15px;
+		font-size: 20px;
+		font-weight: 600;
+		text-transform: capitalize;
+		transition: 0.3s;
+		color: #212121;
+		&:hover {
+			background-color: rgba(0,0,0,0.2);
+			color: #212121;
+			transition: 0.3s;
+		}
+		&:active, &:focus {
+			background-color: inherite;
+			color: #212121;
+		}
+	}
+}
+.nav-toggle {
+	float: right;
+	display: none;
+	margin-top: 20px;
+	position: relative;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	&__line {
+		position: absolute;
+		right: 0;
+		width: 100%;
+		height: 2px;
+		display: block;
+		background: #000;
+		&--top {
+			top: 3px;
+			transition: .3s;
+		}
+		&--middle {
+			top: 9px;
+			transition: .3s;
+			opacity: 1;
+		}
+		&--bottom {
+			bottom: 3px;
+			transition: .3s;
+		}
+	}
+}
