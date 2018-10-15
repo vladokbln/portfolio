@@ -65,17 +65,18 @@ $(function () {
   	resetAnimation: false
   }).init();
 });  
-  $(window).on('load', function(){
-		$('.preloader').fadeOut();
 
-		$(window).scroll(function(){
-			var elem = $('.navbar'),
-					top = $(this).scrollTop();
-			if (top >= 70) {
-				elem.addClass('fixed')
-			} 
-			else {
-				elem.removeClass('fixed');
-			}
-	  });
+$(window).on('load', function(){
+	$('.preloader').fadeOut();
+
+	$(window).scroll(function(){
+		var elem = $('.navbar'),
+				top = $(this).scrollTop();
+		if (top >= 70) {
+			elem.addClass('fixed')
+		} 
+		else {
+			elem.removeClass('fixed');
+		}
 	});
+});
