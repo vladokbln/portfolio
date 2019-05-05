@@ -22,6 +22,5 @@
   "scripts": {
     "build": "gulp build"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

@@ -6,15 +6,20 @@
 
 $(function () {
 	function portfBtn() {
-		if ($('.portfolio-list').height() < $('.portfolio-list').prop('scrollHeight')) {
+		if ($('.portfolio-list').outerHeight(true) < $('.portfolio-list').prop('scrollHeight') - 10) {
 			$('.portfolio-btn').show();
 		} else {
 			$('.portfolio-btn').hide();
 		}	
+		console.log(1235)
+		console.log($('.portfolio-list').height())
+		console.log($('.portfolio-list').outerHeight(true) + ' our-height')
+		console.log($('.portfolio-list').prop('scrollHeight') - 10)
 	}
-
+	portfBtn();
+	
 	$(window).on('load', function(){
-		portfBtn()
+		portfBtn();
 	});
 	$(window).resize(function(){
 		portfBtn()
@@ -31,7 +36,10 @@ $(function () {
   });
 
   $('.portfolio-btn').click(function() {
-  	$('.portfolio-list').css({maxHeight: '100%'}, 2000);
+		$('.portfolio-list').css({
+			minHeight: '100%',
+			height: 'auto'
+		}, 2000);
   	$(this).hide();
   });
 

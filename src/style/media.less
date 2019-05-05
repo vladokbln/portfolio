@@ -1,6 +1,6 @@
 @media only screen and (max-width:1290px) {
-	.banner-body {
-		margin-top: 20%;
+	.banner-content {
+		margin-top: calc(70% - 50px);
 	}
 }
 @media only screen and (max-width: 1199px) { 
@@ -19,14 +19,8 @@
 		.about-flex {
 			justify-content: center;
 		}
-	.banner-body {
-		margin-top: 20%;
-	}
 }	
 @media only screen and (max-width: 768px) { 
-	.banner-body {
-		margin-top: 30%;
-	}
 	h2 {
 		font-size: 34px;
 		margin-bottom: 20px;
@@ -120,18 +114,17 @@
 
 // горизонтальное положение
 
-// @media screen and (max-width:1290px) and (orientation:landscape) {
-// 	.banner-body {
-// 		margin-top: 90px;
-// 	}
-// }
+@media screen and (max-width:1366px) and (orientation:landscape) {
+
+}
 @media screen and (max-width:823px) and (orientation:landscape) {
 
-	.banner-body {
+	.banner-content {
 		display: flex;
 		justify-content: space-around;
 		height: 300px;
 		align-items: center;
+		margin-top: calc(70% - 50px);
 	}
 	.banner-img {
 		margin: 0;
@@ -143,11 +136,9 @@
 	.banner-text {
 		font-size: 28px;
 	}
-	.banner-body {
-		margin-top: 80px;
-	}
 
 }
+
 @media screen and (max-width:640px) and (orientation:landscape) {
 
 	.banner-title {
@@ -159,7 +150,5 @@
 	}
 }
 @media screen and (max-width:568px) and (orientation:landscape) {
-	.banner-body {
-		margin-top: 50px;
-	}
+
 }

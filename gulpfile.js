@@ -19,7 +19,8 @@ var path = {
     css:   'build/css/',
     img:   'build/img/',
     spr:   'src/img/sprite',
-    fonts: 'build/fonts/'
+		fonts: 'build/fonts/',
+    webFonts: 'build/webfonts/'		
   },
   src: {
     html:  'src/*.html',
@@ -27,7 +28,8 @@ var path = {
     style: 'src/style/main.less',
     img:   'src/img/**/*.*',
     spr:   'src/img/icon/*.png',
-    fonts: 'src/fonts/**/*.*'
+    fonts: 'src/fonts/**/*.*',
+    webFonts: 'src/bower_components/components-font-awesome/webfonts/**/*.*'
   },
   watch: {
     html:  'src/**/*.html',
@@ -35,7 +37,8 @@ var path = {
     css:   'src/style/**/*.less',
     img:   'src/img/**/*.*',
     spr:   'src/img/sprite/.png',
-    fonts: 'srs/fonts/**/*.*'
+		fonts: 'srs/fonts/**/*.*',
+		webFonts: 'src/bower_components/components-font-awesome/webfonts/**/*.*'
   },
   clean:     './build'
 };
@@ -117,6 +120,12 @@ gulp.task('fonts:build', function() {
     .pipe(gulp.dest(path.build.fonts));
 });
 
+// перенос web-шрифтов
+gulp.task('webFonts:build', function() {
+  gulp.src(path.src.webFonts)
+    .pipe(gulp.dest(path.build.webFonts));
+});
+
 // обработка картинок
 gulp.task('image:build', function () {
   gulp.src([path.src.img, '!src/img/**/*.less'])
@@ -160,6 +169,7 @@ gulp.task('build', function(fn) {
   'css:build',
   'js:build',
   'fonts:build',
+  'webFonts:build',
   'sprite:build',
   'image:build',
   fn  
@@ -173,7 +183,8 @@ gulp.task('watch', function() {
   gulp.watch(path.watch.js, ['js:build']);
   gulp.watch(path.watch.spr, ['sprite:build']);
   gulp.watch(path.watch.img, ['image:build']);
-  gulp.watch(path.watch.fonts, ['fonts:build']);
+	gulp.watch(path.watch.fonts, ['fonts:build']);
+  gulp.watch(path.watch.webFonts, ['webFonts:build']);	
 });
  
 // задача по умолчанию

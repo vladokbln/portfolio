@@ -4,7 +4,7 @@
 		justify-content: space-between;
 		flex-wrap: wrap;
 		margin: 0 -10px;
-		max-height: 680px;
+		height: 680px;
 		overflow: hidden;
 		&:after {
 			content: "";
@@ -17,7 +17,7 @@
 		position: relative;
 		width: 100%;
 		max-width: 360px;
-		margin-bottom: 20px;
+		margin-bottom: 25px;
 		margin-left: 10px;
 		margin-right: 10px;
 		padding: 5px 5px 0 5px;
@@ -29,6 +29,8 @@
 		img {
 			width: 100%;
 			display: block;
+			min-height: 250px;
+			object-fit: contain;
 		}
 		&__caption {
 			display: flex;
