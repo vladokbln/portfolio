@@ -11,10 +11,6 @@ $(function () {
 		} else {
 			$('.portfolio-btn').hide();
 		}	
-		console.log(1235)
-		console.log($('.portfolio-list').height())
-		console.log($('.portfolio-list').outerHeight(true) + ' our-height')
-		console.log($('.portfolio-list').prop('scrollHeight') - 10)
 	}
 	portfBtn();
 	
