@@ -72,21 +72,24 @@ var gulp = require('gulp'),  // подключаем Gulp
 /* задачи */
 
 // запуск сервера
-gulp.task('webserver', function () {
+gulp.task('webserver', function (cd) {
   webserver(config);
+	cd();
 });
 
 // сбор html
-gulp.task('html:build', function () {
+gulp.task('html:build', function (cb) {
   gulp.src(path.src.html) 
     .pipe(plumber()) 
     .pipe(rigger()) 
     .pipe(gulp.dest(path.build.html)) 
-    .pipe(webserver.reload({stream: true})); 
+    .pipe(webserver.reload({stream: true})
+	);
+	cb();
 });
 
 // сбор стилей
-gulp.task('css:build', function () {
+gulp.task('css:build', function (cb) {
   gulp.src(path.src.style) 
     .pipe(plumber()) 
     .pipe(sourcemaps.init()) 
@@ -99,11 +102,13 @@ gulp.task('css:build', function () {
     .pipe(cleanCSS())
     .pipe(sourcemaps.write('./')) 
     .pipe(gulp.dest(path.build.css)) 
-    .pipe(webserver.reload({stream: true,logSnippet:false})); 
+    .pipe(webserver.reload({stream: true,logSnippet:false})
+	);
+	cb();
 });
 
 // сбор js
-gulp.task('js:build', function () {
+gulp.task('js:build', function (cb) {
   gulp.src(path.src.js) 
     .pipe(plumber()) 
     .pipe(rigger()) 
@@ -111,23 +116,29 @@ gulp.task('js:build', function () {
     .pipe(uglify()) 
     .pipe(sourcemaps.write('./')) 
     .pipe(gulp.dest(path.build.js)) 
-    .pipe(webserver.reload({stream: true})); 
+    .pipe(webserver.reload({stream: true})
+	);
+	cb(); 
 });
 
 // перенос шрифтов
-gulp.task('fonts:build', function() {
+gulp.task('fonts:build', function(cb) {
   gulp.src(path.src.fonts)
-    .pipe(gulp.dest(path.build.fonts));
+    .pipe(gulp.dest(path.build.fonts)
+	);
+	cb();
 });
 
 // перенос web-шрифтов
-gulp.task('webFonts:build', function() {
+gulp.task('webFonts:build', function(cb) {
   gulp.src(path.src.webFonts)
-    .pipe(gulp.dest(path.build.webFonts));
+    .pipe(gulp.dest(path.build.webFonts)
+	);
+	cb();
 });
 
 // обработка картинок
-gulp.task('image:build', function () {
+gulp.task('image:build', function (cb) {
   gulp.src([path.src.img, '!src/img/**/*.less'])
     .pipe(cache(imagemin([ 
       imagemin.gifsicle({interlaced: true}),
@@ -139,21 +150,25 @@ gulp.task('image:build', function () {
         pngquant(),
         imagemin.svgo({plugins: [{removeViewBox: false}]})
   	])))
-    .pipe(gulp.dest(path.build.img)); 
+    .pipe(gulp.dest(path.build.img)
+	);
+	cb();
 });
 
-gulp.task('sprite:build', function () {
+gulp.task('sprite:build', function (cb) {
   var spriteData = gulp.src(path.src.spr).pipe(spritesmith({
     imgName: 'sprite.png',
     cssName: 'sprite.less',
     imgPath: '../img/sprite/sprite.png'
   }));
   return spriteData.pipe(gulp.dest(path.build.spr));
+	cb();
 });
 
 // удаление каталога build 
-gulp.task('clean:build', function () {
+gulp.task('clean:build', function (cb) {
   del.sync(path.clean);
+	cb();
 });
 
 // очистка кэша
@@ -162,37 +177,31 @@ gulp.task('cache:clear', function () {
 });
 
 // сборка
-gulp.task('build', function(fn) {
-  run(
+gulp.task('build', gulp.series(
   'clean:build',
-  'html:build',
-  'css:build',
-  'js:build',
-  'fonts:build',
-  'webFonts:build',
-  'sprite:build',
-  'image:build',
-  fn  
-  );
-});
+	'html:build',
+	'css:build',
+	'js:build',
+	'fonts:build',
+	'webFonts:build',
+	'sprite:build',
+	'image:build'
+));
 
 // запуск задач при изменении файлов
 gulp.task('watch', function() {
-  gulp.watch(path.watch.html, ['html:build']);
-  gulp.watch(path.watch.css, ['css:build']);
-  gulp.watch(path.watch.js, ['js:build']);
-  gulp.watch(path.watch.spr, ['sprite:build']);
-  gulp.watch(path.watch.img, ['image:build']);
-	gulp.watch(path.watch.fonts, ['fonts:build']);
-  gulp.watch(path.watch.webFonts, ['webFonts:build']);	
+  gulp.watch(path.watch.html, gulp.series('html:build'));
+  gulp.watch(path.watch.css, gulp.series('css:build'));
+  gulp.watch(path.watch.js, gulp.series('js:build'));
+  gulp.watch(path.watch.spr, gulp.series('sprite:build'));
+  gulp.watch(path.watch.img, gulp.series('image:build'));
+	gulp.watch(path.watch.fonts, gulp.series('fonts:build'));
+  gulp.watch(path.watch.webFonts, gulp.series('webFonts:build'));	
 });
  
 // задача по умолчанию
-gulp.task('default', function (fn){
-  run(
+gulp.task('default', gulp.series(
     'build',
     'webserver',
-    'watch',
-    fn
-  );
-});
+    'watch'
+));
